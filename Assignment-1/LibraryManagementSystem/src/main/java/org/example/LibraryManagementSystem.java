@@ -6,6 +6,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+
+
+class Member {
+    int id;
+    String name;
+    int age;
+    String phoneNumber;
+    int penalty;
+    ArrayList<Book> borrowedBooks;
+
+    public Member(int id, String name, int age, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.penalty = 0;
+        this.borrowedBooks = new ArrayList<>();
+    }
+}
+
+
+class Book {
+    int id;
+    String title;
+    String author;
+    int totalCopies;
+    int availableCopies;
+    long dueDate;  // Add the dueDate field
+
+    public Book(int id, String title, String author, int totalCopies) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.totalCopies = totalCopies;
+        this.availableCopies = totalCopies;
+        this.dueDate = 0; //initialize due date to 0
+    }
+}
+
 public class LibraryManagementSystem {
     static ArrayList<Book> books = new ArrayList<>();
     static ArrayList<Member> members = new ArrayList<>();
@@ -343,39 +382,3 @@ public class LibraryManagementSystem {
 }
 
 
-class Member {
-    int id;
-    String name;
-    int age;
-    String phoneNumber;
-    int penalty;
-    ArrayList<Book> borrowedBooks;
-
-    public Member(int id, String name, int age, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
-        this.penalty = 0;
-        this.borrowedBooks = new ArrayList<>();
-    }
-}
-
-
-class Book {
-    int id;
-    String title;
-    String author;
-    int totalCopies;
-    int availableCopies;
-    long dueDate;  // Add the dueDate field
-
-    public Book(int id, String title, String author, int totalCopies) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.totalCopies = totalCopies;
-        this.availableCopies = totalCopies;
-        this.dueDate = 0; //initialize due date to 0
-    }
-}
