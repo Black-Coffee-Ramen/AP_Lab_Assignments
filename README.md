@@ -23,7 +23,7 @@ To build and run this program using Apache Maven, follow these steps:
 
 3. **Run the Application:**
    ```bash
-   java -jar target/library-management-system.jar
+   java -jar target/LibraryManagementSystem.jar
    ```
 
 4. The program will display a menu with options for librarian and member actions.
