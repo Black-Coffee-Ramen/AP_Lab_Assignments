@@ -80,11 +80,11 @@ Here are some potential improvements for this program:
 This program is provided under the MIT License. You are free to use and modify it according to your needs.
 
 ## Author
-This program was developed by [Your Name].
+This program was developed by Athiyo Chakma.
 
 ## Contact
 If you have any questions or suggestions, please feel free to contact [Your Email Address].
 
 ---
 
-**Note:** This README is a template. Replace `[Your Name]` and `[Your Email Address]` with your own information, and make any other necessary modifications to fit your specific implementation.
+**Note:** This README is a template. Replace `Athiyo Chakma` and `athiyodhame@gmail.com` with your own information, and make any other necessary modifications to fit your specific implementation.
