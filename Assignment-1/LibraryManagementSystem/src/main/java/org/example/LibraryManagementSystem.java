@@ -5,7 +5,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
+
+
+class Book {
+    int id;
+    String title;
+    String author;
+    int totalCopies;
+    int availableCopies;
+    long dueDate;  // Add the dueDate field
+
+    public Book(int id, String title, String author, int totalCopies) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.totalCopies = totalCopies;
+        this.availableCopies = totalCopies;
+        this.dueDate = 0; //initialize due date to 0
+    }
+}
 
 
 class Member {
@@ -26,24 +47,6 @@ class Member {
     }
 }
 
-
-class Book {
-    int id;
-    String title;
-    String author;
-    int totalCopies;
-    int availableCopies;
-    long dueDate;  // Add the dueDate field
-
-    public Book(int id, String title, String author, int totalCopies) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.totalCopies = totalCopies;
-        this.availableCopies = totalCopies;
-        this.dueDate = 0; //initialize due date to 0
-    }
-}
 
 public class LibraryManagementSystem {
     static ArrayList<Book> books = new ArrayList<>();
@@ -70,6 +73,7 @@ public class LibraryManagementSystem {
                 System.out.println("Invalid choice. Please try again.");
             }
         }
+        finesTimer.scheduleAtFixedRate(new UpdateFinesTask(), 1000, 1000);
     }
 
 
@@ -358,7 +362,7 @@ public class LibraryManagementSystem {
             long delayDays = delayMillis / (24 * 60 * 60 * 1000); // Convert milliseconds to days
 
             if (delayDays > 0) {
-                int fine = (int) (delayDays * 3); // Charge 3 rupees per day of delay
+                int fine = (int) (delayDays * fineRate);
                 System.out.println("Book ID: " + bookToReturn.id + " successfully returned. " + fine + " Rupees has been charged for a delay of " + delayDays + " days.");
                 loggedInMember.penalty += fine;
             } else {
@@ -379,6 +383,29 @@ public class LibraryManagementSystem {
         System.out.println("You had a total fine of Rs. " + loggedInMember.penalty + ". It has been paid successfully!");
         loggedInMember.penalty = 0;
     }
+
+    // Declare these as static members of your LibraryManagementSystem class
+    static Timer finesTimer = new Timer();
+    static int fineRate = 3; // Rupees per day
+
+    static class UpdateFinesTask extends TimerTask {
+        @Override
+        public void run() {
+            // Iterate through members and update fines for overdue books
+            long currentTimeMilliseconds = System.currentTimeMillis();
+
+            for (Member member : members) {
+                for (Book book : member.borrowedBooks) {
+                    long delayMilliseconds = currentTimeMilliseconds - book.dueDate;
+                    long delayDays = delayMilliseconds / (10 * 24 * 60 * 60 * 1000); // Convert milliseconds to days
+
+                    if (delayDays > 0) {
+                        int fine = (int) (delayDays * fineRate);
+                        member.penalty += fine;
+                    }
+                }
+            }
+        }
+    }
+
 }
-
-
