@@ -87,4 +87,3 @@ If you have any questions or suggestions, please feel free to contact [Your Emai
 
 ---
 
-**Note:** This README is a template. Replace `Athiyo Chakma` and `athiyodhame@gmail.com` with your own information, and make any other necessary modifications to fit your specific implementation.
