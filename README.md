@@ -31,7 +31,7 @@ To build and run this program using Apache Maven, follow these steps:
 ## Maven Structure
 This project follows a standard Maven project structure:
 
-- `src/main/java`: Contains the Java source code.
+- `src/main/java/org/example`: Contains the Java source code.
 - `src/main/resources`: Contains resource files, such as configuration files.
 - `target`: Contains the compiled classes and the JAR file.
 
