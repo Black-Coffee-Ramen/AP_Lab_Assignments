@@ -83,7 +83,7 @@ This program is provided under the MIT License. You are free to use and modify i
 This program was developed by Athiyo Chakma.
 
 ## Contact
-If you have any questions or suggestions, please feel free to contact [Your Email Address].
+If you have any questions or suggestions, please feel free to contact athiyodhamei@gmail.com.
 
 ---
 
