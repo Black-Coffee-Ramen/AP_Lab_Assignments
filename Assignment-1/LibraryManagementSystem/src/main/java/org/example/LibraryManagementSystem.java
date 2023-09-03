@@ -36,6 +36,7 @@ class Member {
     String phoneNumber;
     int penalty;
     ArrayList<Book> borrowedBooks;
+    long issueTimestamp; // Added to track the time when a book was issued
 
     public Member(int id, String name, int age, String phoneNumber) {
         this.id = id;
@@ -44,8 +45,10 @@ class Member {
         this.phoneNumber = phoneNumber;
         this.penalty = 0;
         this.borrowedBooks = new ArrayList<>();
+        this.issueTimestamp = 0; // Initialize issueTimestamp to 0
     }
 }
+
 
 
 public class LibraryManagementSystem {
@@ -331,8 +334,11 @@ public class LibraryManagementSystem {
                 loggedInMember.borrowedBooks.add(bookToIssue);
                 bookToIssue.availableCopies--;
 
+                // Set the issueTimestamp to the current time when the book is issued
+                loggedInMember.issueTimestamp = System.currentTimeMillis();
+
                 // Set the due date to 10 days from the issue date
-                bookToIssue.dueDate = System.currentTimeMillis() + (10 * 24 * 60 * 60 * 1000);
+                bookToIssue.dueDate = loggedInMember.issueTimestamp + (10 * 24 * 60 * 60 * 1000);
 
                 System.out.println("Book Issued Successfully!");
             } else {
@@ -342,6 +348,7 @@ public class LibraryManagementSystem {
             System.out.println("Book with ID " + bookId + " not found.");
         }
     }
+
 
     static void returnBook(Scanner scanner, Member loggedInMember) {
         listMyBooks(loggedInMember);
@@ -358,12 +365,14 @@ public class LibraryManagementSystem {
 
         if (bookToReturn != null) {
             long currentTimeMillis = System.currentTimeMillis();
-            long delayMillis = currentTimeMillis - bookToReturn.dueDate;
-            long delayDays = delayMillis / (24 * 60 * 60 * 1000); // Convert milliseconds to days
+            long issueTimeMillis = loggedInMember.issueTimestamp;
+            //long dueDateMillis = bookToReturn.dueDate; //either one
 
-            if (delayDays > 0) {
-                int fine = (int) (delayDays * fineRate);
-                System.out.println("Book ID: " + bookToReturn.id + " successfully returned. " + fine + " Rupees has been charged for a delay of " + delayDays + " days.");
+            long durationSeconds = (currentTimeMillis - issueTimeMillis) / 1000; // Calculate duration in seconds
+
+            if (durationSeconds > 10) {
+                int fine = (int) ((durationSeconds - 10) * fineRate); // Calculate fine for extra seconds
+                System.out.println("Book ID: " + bookToReturn.id + " successfully returned. " + fine + " Rupees has been charged for a delay of " + (durationSeconds - 10) + " seconds.");
                 loggedInMember.penalty += fine;
             } else {
                 System.out.println("Book ID: " + bookToReturn.id + " successfully returned.");
@@ -372,11 +381,13 @@ public class LibraryManagementSystem {
             bookToReturn.availableCopies++;
             loggedInMember.borrowedBooks.remove(bookToReturn);
             // Reset the due date to 0
-            bookToReturn.dueDate = 0;
+            //bookToReturn.dueDate = 0; //try this one too
         } else {
             System.out.println("Book with ID " + bookId + " not found in your borrowed books.");
         }
     }
+
+
 
 
     static void payFine(Member loggedInMember) {
