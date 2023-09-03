@@ -12,7 +12,7 @@ To build and run this program using Apache Maven, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/library-management-system.git
+   git clone https://github.com/Alpha-rgb-cell/AP_Lab_Assignments.git
    cd library-management-system
    ```
 
