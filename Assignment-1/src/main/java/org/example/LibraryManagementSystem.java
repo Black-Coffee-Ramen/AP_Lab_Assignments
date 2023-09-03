@@ -372,7 +372,7 @@ public class LibraryManagementSystem {
 
             if (durationSeconds > 10) {
                 int fine = (int) ((durationSeconds - 10) * fineRate); // Calculate fine for extra seconds
-                System.out.println("Book ID: " + bookToReturn.id + " successfully returned. " + fine + " Rupees has been charged for a delay of " + (durationSeconds - 10) + " seconds.");
+                System.out.println("Book ID: " + bookToReturn.id + " successfully returned. " + fine + " Rupees has been charged for a delay of " + (durationSeconds - 10) + " days.");
                 loggedInMember.penalty += fine;
             } else {
                 System.out.println("Book ID: " + bookToReturn.id + " successfully returned.");
