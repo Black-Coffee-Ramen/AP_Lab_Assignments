@@ -77,7 +77,7 @@ Here are some potential improvements for this program:
 - Implement a reservation system for books that are currently unavailable.
 
 ## License
-This program is provided under the MIT License. You are free to use and modify it according to your needs.
+This program is provided under the Apache License. You are free to use and modify it according to your needs.
 
 ## Author
 This program was developed by Athiyo Chakma.
